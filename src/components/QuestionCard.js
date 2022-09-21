@@ -10,7 +10,6 @@ function QuestionCard({ question, options, selectAnswer }) {
           key={option}
           value={option}
           handleClick={() => selectAnswer(option)}
-          console.log('Hello')
         />
       ))}
     </>
