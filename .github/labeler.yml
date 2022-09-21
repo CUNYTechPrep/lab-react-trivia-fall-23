@@ -1,0 +1,10 @@
+Tuesday:
+    - '- \[(x|X)\] Tuesday'
+Wednesday:
+    - '- \[(x|X)\] Wednesday'
+Thursday:
+    - '- \[(x|X)\] Thursday'
+Friday3pm:
+    - '- \[(x|X)\] Friday 3pm'
+Friday6pm:
+    - '- \[(x|X)\] Friday 6pm'
