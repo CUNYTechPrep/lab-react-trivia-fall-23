@@ -37,11 +37,36 @@ function App() {
     );
   }
 
+  // event handler for Next Question button
+  const nextQuestion = (event) => {
+    console.log("the button was pressed!");
+    // reset selected answer 
+    setSelectedAnswer(null);
+    // generate new question using API
+    const fetchPromise = fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple');
+    fetchPromise
+    .then((response) => response.json())
+    .then((data) => {
+      setQuestionData(data.results[0]);
+      let options = [
+        questionData.correct_answer,
+        ...questionData.incorrect_answers,
+      ];
+      card = (
+        <QuestionCard
+          question={questionData.question}
+          options={shuffleArray(options)}
+          selectAnswer={selectAnswer}
+        />
+      );
+    })
+  }
+
   return (
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={nextQuestion}>Next Question</button>
         {card}
       </div>
     </div>
