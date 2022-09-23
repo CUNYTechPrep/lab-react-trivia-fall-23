@@ -40,25 +40,15 @@ function App() {
   // event handler for Next Question button
   const nextQuestion = (event) => {
     console.log("the button was pressed!");
-    // reset selected answer 
-    setSelectedAnswer(null);
+    
     // generate new question using API
     const fetchPromise = fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple');
     fetchPromise
     .then((response) => response.json())
     .then((data) => {
       setQuestionData(data.results[0]);
-      let options = [
-        questionData.correct_answer,
-        ...questionData.incorrect_answers,
-      ];
-      card = (
-        <QuestionCard
-          question={questionData.question}
-          options={shuffleArray(options)}
-          selectAnswer={selectAnswer}
-        />
-      );
+      // reset selected answer 
+      setSelectedAnswer(null);
     })
   }
 
