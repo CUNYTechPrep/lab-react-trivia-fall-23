@@ -3,6 +3,7 @@ import ResultCard from "./components/ResultCard";
 import QuestionCard from "./components/QuestionCard";
 import { shuffleArray } from "./lib/utils";
 import rawTriviaQuestion from "./lib/data";
+import { useEffect } from "react";
 
 const triviaQuestion = rawTriviaQuestion.results[0];
 
@@ -16,6 +17,22 @@ function App() {
 
   let card;
 
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+  const fetchAPI = async () => {
+    try {
+      setSelectedAnswer(null);
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=1&category=9&type=multiple"
+      );
+      const data = await response.json();
+      console.log(data);
+      setQuestionData(data.results[0]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   if (selectedAnswer) {
     card = (
       <ResultCard
@@ -41,7 +58,14 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button
+          onClick={() => {
+            fetchAPI();
+          }}
+          className="btn btn-success"
+        >
+          Next Question
+        </button>
         {card}
       </div>
     </div>
