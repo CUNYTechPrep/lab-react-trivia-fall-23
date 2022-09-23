@@ -37,11 +37,27 @@ function App() {
     );
   }
 
+
+  const handleClick = () => {
+    //clear selectAnswer state so the previous selection(state) 
+    //doesn't repeat for new questions
+    setSelectedAnswer(null);
+
+    const url = "https://opentdb.com/api.php?amount=1&category=9&type=multiple";
+    fetch(url).then(response => response.json())
+    .then((data) => {
+      /*On the next render following the click, questionData will be set
+      to the new question fetched from the API and the card props will pass
+      this new data to be rendered */
+      setQuestionData(data.results[0]);
+    })
+  };
+
   return (
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={handleClick}>Next Question</button>
         {card}
       </div>
     </div>
