@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResultCard from "./components/ResultCard";
 import QuestionCard from "./components/QuestionCard";
 import { shuffleArray } from "./lib/utils";
@@ -15,6 +15,28 @@ function App() {
   };
 
   let card;
+
+  useEffect(() => {
+    fetchApiHandler();
+  }, []);
+
+  const fetchApiHandler = async () => {
+    try {
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=1&category=9&type=multiple"
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const data = await response.json();
+      console.log(data.results);
+      setQuestionData(data.results[0]);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setSelectedAnswer(null);
+  };
 
   if (selectedAnswer) {
     card = (
@@ -41,7 +63,9 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button onClick={fetchApiHandler} className="btn btn-success">
+          Next Question
+        </button>
         {card}
       </div>
     </div>
