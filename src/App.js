@@ -18,7 +18,8 @@ function App() {
     fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
       .then((res) => res.json())
       .then((newQuestion) => {
-        setQuestionData(newQuestion.results);
+        setQuestionData(newQuestion.results[0]);
+        setSelectedAnswer(null);
       });
   };
 
