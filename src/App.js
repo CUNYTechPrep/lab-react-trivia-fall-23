@@ -11,13 +11,13 @@ function App() {
   const [questionData, setQuestionData] = useState(triviaQuestion);
 
   const handleClick = (event) => {
-    //Change value of triviaQuestion 
+    //Change value of triviaQuestion with an API fetch()
     const fetchPromise = fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
     .then((response) => response.json())
-    .then((data) => setQuestionData(data.results[0])); 
-
-    //Switch back to question card
+    .then((data) => setQuestionData(data.results[0]));  
     
+    //Switch back to question card
+    setSelectedAnswer(null);
 } 
 
 
