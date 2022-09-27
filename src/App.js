@@ -14,6 +14,19 @@ function App() {
     setSelectedAnswer(selection);
   };
 
+
+  const fetchTriviaQuestions = () => {
+    // Begin initial fetch to Trivia API
+    fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
+        // convert response data to JSON
+        .then((res) => res.json())
+        // now that we have the actual data we pass set the question and selected answer
+        .then((data) => {
+          setQuestionData(data.results[0]);
+          setSelectedAnswer();
+        });
+  };
+
   let card;
 
   if (selectedAnswer) {
@@ -41,7 +54,8 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        {/* when we click the "Next question" button we fetch  */}
+        <button className="btn btn-success" onClick={ fetchTriviaQuestions } >Next Question</button>
         {card}
       </div>
     </div>
