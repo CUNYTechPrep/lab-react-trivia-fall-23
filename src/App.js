@@ -10,6 +10,15 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [questionData, setQuestionData] = useState(triviaQuestion);
 
+  const getNextQuestion = () => {
+    fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
+      .then((response) => response.json())
+      .then((set) => {
+        setQuestionData(set.results[0]);
+        setSelectedAnswer(null);
+      });
+  };
+
   const selectAnswer = (selection) => {
     setSelectedAnswer(selection);
   };
@@ -41,7 +50,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={getNextQuestion} >Next Question</button>
         {card}
       </div>
     </div>
