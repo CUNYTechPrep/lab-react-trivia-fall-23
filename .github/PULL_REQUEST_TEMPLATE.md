@@ -11,7 +11,7 @@ TITLE: Include your section in the pull request title
 
 ## What section are you in:
 
-- [ ] Tuesday
+- [X] Tuesday
 - [ ] Wednesday
 - [ ] Thursday
 - [ ] Friday 3pm
@@ -19,11 +19,11 @@ TITLE: Include your section in the pull request title
 
 **Is the solution complete?**
 
-[Yes/No]
+[Yes]
 
 **Did you run into any problems?**
 
-[Describe...]
+[ Initially, I could not figure out how to go to the next quesution after result is displayed. But I realized you just need to set selectAnswer to null for that.]
 
 **Did you collaborate with others on this solution?**
 
