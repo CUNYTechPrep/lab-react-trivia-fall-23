@@ -10,8 +10,8 @@ We would like it to work as it does in this solution: https://cunytechprep.githu
 
 ### Tasks
 
-- [ ] Add an event handler for the `Next Question` button
-- [ ] Fetch a new question for the app when the user clicks the `Next Question` button
+- [X] Add an event handler for the `Next Question` button
+- [X] Fetch a new question for the app when the user clicks the `Next Question` button
   - use this API URL: `https://opentdb.com/api.php?amount=1&category=9&type=multiple`
   - the API will return a random question with each call
 
