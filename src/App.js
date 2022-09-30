@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ResultCard from "./components/ResultCard";
 import QuestionCard from "./components/QuestionCard";
 import { shuffleArray } from "./lib/utils";
@@ -37,11 +37,28 @@ function App() {
     );
   }
 
+  async function nextQuestion(){
+    fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data.results[0]);
+      setQuestionData(data.results[0]);
+      setSelectedAnswer(null);
+    })
+    .catch((error) => console.log(error));
+  }
+
+
+
+
+
   return (
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button onClick={nextQuestion} className="btn btn-success">Next Question</button>
         {card}
       </div>
     </div>
