@@ -10,21 +10,21 @@ We would like it to work as it does in this solution: https://cunytechprep.githu
 
 ### Tasks
 
-- [ ] Add an event handler for the `Next Question` button
-- [ ] Fetch a new question for the app when the user clicks the `Next Question` button
-  - use this API URL: `https://opentdb.com/api.php?amount=1&category=9&type=multiple`
-  - the API will return a random question with each call
+-   [x] Add an event handler for the `Next Question` button
+-   [x] Fetch a new question for the app when the user clicks the `Next Question` button
+    -   use this API URL: `https://opentdb.com/api.php?amount=1&category=9&type=multiple`
+    -   the API will return a random question with each call
 
 ### To submit
 
-- Make a fork of this repository
-- Clone your own fork
-- Solve the lab
-  - to get started run `npm install` once to install the packages
-  - to start the react app install `npm start`
-- Commit and push your code to your forked repository
-- Make a pull request back to this repository
-  - Mention your Instructor and TA's names in your pull request message
+-   Make a fork of this repository
+-   Clone your own fork
+-   Solve the lab
+    -   to get started run `npm install` once to install the packages
+    -   to start the react app install `npm start`
+-   Commit and push your code to your forked repository
+-   Make a pull request back to this repository
+    -   Mention your Instructor and TA's names in your pull request message
 
 ---
 
