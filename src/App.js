@@ -11,9 +11,14 @@ function App() {
   const [questionData, setQuestionData] = useState(triviaQuestion);
 
   const selectAnswer = (selection) => {
-    setSelectedAnswer(selection);
-  };
+    setSelectedAnswer(selection); 
+ }; 
+ 
+  const getQuestion = () => { fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple").then((response) => response.json())
+    .then((results) => { setQuestionData(results.results[0]); setSelectedAnswer(null)
+    }).catch((error) => {console.log("Error: ", error)})};
 
+    
   let card;
 
   if (selectedAnswer) {
@@ -21,6 +26,7 @@ function App() {
       <ResultCard
         correct={selectedAnswer === questionData.correct_answer}
         answer={questionData.correct_answer}
+        
       />
     );
   } else {
@@ -32,7 +38,7 @@ function App() {
       <QuestionCard
         question={questionData.question}
         options={shuffleArray(options)}
-        selectAnswer={selectAnswer}
+        selectAnswer={selectAnswer} 
       />
     );
   }
@@ -41,7 +47,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={getQuestion} >Next Question</button>
         {card}
       </div>
     </div>
