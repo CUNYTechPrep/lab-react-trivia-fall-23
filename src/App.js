@@ -9,10 +9,26 @@ const triviaQuestion = rawTriviaQuestion.results[0];
 function App() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [questionData, setQuestionData] = useState(triviaQuestion);
+  
 
   const selectAnswer = (selection) => {
     setSelectedAnswer(selection);
   };
+
+  const handleNextQuestion = () => {
+    fetch('https://opentdb.com/api')
+  }
+
+  const handleClick = () => {
+    console.log("next question clicked")
+    fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setQuestionData(data.results[0]);
+        setSelectedAnswer(null);
+      });
+  }
 
   let card;
 
@@ -41,7 +57,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button onClick={handleClick} className="btn btn-success" onClick={handleNextQuestion}>Next Question</button>
         {card}
       </div>
     </div>
