@@ -7,11 +7,15 @@ import rawTriviaQuestion from "./lib/data";
 const triviaQuestion = rawTriviaQuestion.results[0];
 
 function App() {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null); // if null, user hasn't selected anything yet
   const [questionData, setQuestionData] = useState(triviaQuestion);
 
+  const getNextQuestion = () => {
+    console.log("Next question requested");
+  };
+  
   const selectAnswer = (selection) => {
-    setSelectedAnswer(selection);
+    setSelectedAnswer(selection); // value passed (selection) is stored in the selectedAnswer state
   };
 
   let card;
@@ -19,7 +23,7 @@ function App() {
   if (selectedAnswer) {
     card = (
       <ResultCard
-        correct={selectedAnswer === questionData.correct_answer}
+         correct={selectedAnswer === questionData.correct_answer}
         answer={questionData.correct_answer}
       />
     );
@@ -41,7 +45,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={getNextQuestion}>Next Question</button>
         {card}
       </div>
     </div>
