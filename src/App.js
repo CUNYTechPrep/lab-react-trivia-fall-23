@@ -11,7 +11,16 @@ function App() {
   const [questionData, setQuestionData] = useState(triviaQuestion);
 
   const getNextQuestion = () => {
-    console.log("Next question requested");
+    fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple").then(
+      (response) => {
+        console.log(response);
+        return response.json();
+      }
+    ).then((jsonBody) => {
+        console.log(jsonBody);
+        setQuestionData(jsonBody.results[0]);
+        setSelectedAnswer(null);
+    });
   };
   
   const selectAnswer = (selection) => {
