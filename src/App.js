@@ -16,6 +16,21 @@ function App() {
 
   let card;
 
+  const handleClick = (event) => {
+    // declaring url variable
+    let triviaURL = "https://opentdb.com/api.php?amount=1&category=9&type=multiple"
+    // fetch url data, turn response into json, then get .results[0]
+    fetch(triviaURL)
+    .then((result) => result.json())
+    .then((fetchData) => {
+      console.log(fetchData.results[0])
+      //set fetched data to questionData
+      setQuestionData(fetchData.results[0]);
+      //selectedAnswer becomes null, brings question card back
+      setSelectedAnswer(null);
+    })
+  }
+
   if (selectedAnswer) {
     card = (
       <ResultCard
@@ -41,7 +56,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={handleClick}>Next Question</button>
         {card}
       </div>
     </div>
