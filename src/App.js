@@ -14,6 +14,18 @@ function App() {
     setSelectedAnswer(selection);
   };
 
+  
+  const newQuestion = async () => {
+    try {
+      const someQuestionResponse = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple');
+      const someQuestionData = await someQuestionResponse.json();
+      setQuestionData(someQuestionData.results[0]);
+    } 
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   let card;
 
   if (selectedAnswer) {
@@ -41,7 +53,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={newQuestion}>Next Question</button>
         {card}
       </div>
     </div>
