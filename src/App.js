@@ -37,11 +37,27 @@ function App() {
     );
   }
 
+  const loadNewQuestion = async () => {
+    try {
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=1&type=multiple"
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setQuestionData(data.results[0]);
+      setSelectedAnswer(null); // Reset selected answer
+    } catch (error) {
+      console.error("Error fetching question:", error);
+    }
+  };
+
   return (
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={loadNewQuestion}>Next Question</button>
         {card}
       </div>
     </div>
