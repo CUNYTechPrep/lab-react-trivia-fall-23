@@ -14,13 +14,11 @@ function App() {
     try {
       const response = await fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple");
       const data = await response.json();
-      console.log(data);
       setQuestionData(data.results[0]);
       setSelectedAnswer(null);
     } catch (error) {
       console.log('Error: ', error);
     }
-    
   }
 
   const selectAnswer = (selection) => {
