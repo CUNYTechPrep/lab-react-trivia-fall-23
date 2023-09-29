@@ -6,6 +6,8 @@ import rawTriviaQuestion from "./lib/data";
 
 const triviaQuestion = rawTriviaQuestion.results[0];
 
+
+
 function App() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [questionData, setQuestionData] = useState(triviaQuestion);
@@ -13,9 +15,24 @@ function App() {
   const selectAnswer = (selection) => {
     setSelectedAnswer(selection);
   };
-
+  const fetchData = async () => {
+    try {
+      let data = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple');
+      let body = await data.json();
+      setQuestionData(body.results[0])
+      console.log('Success', body);
+     
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  
   let card;
-
+  const handleQuestion = () => {
+    setSelectedAnswer(null);
+    fetchData();
+  };
   if (selectedAnswer) {
     card = (
       <ResultCard
@@ -24,10 +41,12 @@ function App() {
       />
     );
   } else {
-    let options = [
-      questionData.correct_answer,
-      ...questionData.incorrect_answers,
-    ];
+    let options = [];
+    if (questionData.incorrect_answers) {
+      options = [questionData.correct_answer,
+        ...questionData.incorrect_answers
+      ]
+    }
     card = (
       <QuestionCard
         question={questionData.question}
@@ -41,7 +60,7 @@ function App() {
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={handleQuestion}>Next Question</button>
         {card}
       </div>
     </div>
