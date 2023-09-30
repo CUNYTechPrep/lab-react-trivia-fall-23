@@ -37,11 +37,23 @@ function App() {
     );
   }
 
+  const handleClick = async () => {
+    try {
+      let response = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple');
+      let body = await response.json();
+      setSelectedAnswer(0);
+      setQuestionData(body.results[0]);
+      console.log('Success:', body);
+    } catch(error) {
+      console.log('Error:', error);
+    }
+  };
+
   return (
     <div className="w-100 my-5 d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: "45%" }}>
         <h1 className="text-center">Trivia App</h1>
-        <button className="btn btn-success">Next Question</button>
+        <button className="btn btn-success" onClick={handleClick}> Next Question </button>
         {card}
       </div>
     </div>
